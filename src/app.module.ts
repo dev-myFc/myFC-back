@@ -3,14 +3,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
-import { HttpExceptionFilter } from './filter/exception/http.exception.filter';
-import { LoggerMiddleware } from './middleware/logger/logger.middleware';
+import { HttpExceptionFilter } from './filters/exception/http.exception.filter';
+import { LoggerMiddleware } from './middlewares/logger/logger.middleware';
 import { AuthModule } from './apis/auth/auth.module';
 import { UserModule } from './apis/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, UserModule, PrismaModule],
+  imports: [
+    AuthModule,
+    UserModule,
+    PrismaModule,
+    ConfigModule.forRoot({
+      cache: true,
+      isGlobal: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [
     AppService,
