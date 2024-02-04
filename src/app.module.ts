@@ -5,9 +5,12 @@ import { ZodValidationPipe } from 'nestjs-zod';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { HttpExceptionFilter } from './filter/exception/http.exception.filter';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
+import { AuthModule } from './apis/auth/auth.module';
+import { UserModule } from './apis/user/user.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [],
+  imports: [AuthModule, UserModule, PrismaModule],
   controllers: [AppController],
   providers: [
     AppService,
