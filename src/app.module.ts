@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ZodValidationPipe } from 'nestjs-zod';
-import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { HttpExceptionFilter } from './filters/exception/http.exception.filter';
 import { LoggerMiddleware } from './middlewares/logger/logger.middleware';
 import { AuthModule } from './apis/auth/auth.module';
@@ -12,8 +12,8 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    AuthModule,
     UserModule,
+    AuthModule,
     PrismaModule,
     ConfigModule.forRoot({
       cache: true,

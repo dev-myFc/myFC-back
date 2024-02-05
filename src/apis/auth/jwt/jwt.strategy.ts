@@ -8,9 +8,8 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwtAccessToken') {
   constructor(
-    private readonly authService: AuthService,
-    @Inject('userService')
-    private readonly userService: UserService,
+    @Inject('authService') private readonly authService: AuthService,
+    @Inject('userService') private readonly userService: UserService,
     private readonly configService: ConfigService,
   ) {
     super({

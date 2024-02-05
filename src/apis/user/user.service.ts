@@ -16,11 +16,8 @@ export interface UserService {
 @Injectable()
 export class UserServiceImpl implements UserService {
   constructor(
-    @Inject('userRepository')
-    private readonly userRepository: UserRepository,
-
-    @Inject('authService')
-    private readonly authService: AuthService,
+    @Inject('userRepository') private readonly userRepository: UserRepository,
+    @Inject('authService') private readonly authService: AuthService,
   ) {}
 
   async signUp(request: UserSignUpRequestDto) {

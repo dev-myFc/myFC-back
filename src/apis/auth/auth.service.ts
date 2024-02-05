@@ -16,10 +16,9 @@ export interface AuthService {
 @Injectable()
 export class AuthServiceImpl implements AuthService {
   constructor(
-    private readonly jwtService: JwtService,
-    @Inject('userRepository')
-    private userRepository: UserRepository,
+    @Inject('userRepository') private readonly userRepository: UserRepository,
     private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async jwtSignIn(request: SignInRequestDto) {

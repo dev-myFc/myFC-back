@@ -8,13 +8,13 @@ import { AuthServiceImpl } from '../auth/auth.service';
 
 @Module({
   imports: [forwardRef(() => AuthModule)],
+  controllers: [UserController],
   providers: [
     { provide: 'userService', useClass: UserServiceImpl },
     { provide: 'userRepository', useClass: UserRepositoryImpl },
     { provide: 'authService', useClass: AuthServiceImpl },
     PrismaService,
   ],
-  controllers: [UserController],
   exports: [
     { provide: 'userService', useClass: UserServiceImpl },
     { provide: 'userRepository', useClass: UserRepositoryImpl },
