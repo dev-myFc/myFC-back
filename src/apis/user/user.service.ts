@@ -3,14 +3,18 @@ import {
   UserSignUpRequestDto,
   createUserConverter,
   findUserByEmailConverter,
-} from './dtos/signup/signup.requrest.dto';
+} from './dtos/signup/signup.request.dto';
 import { UserRepository } from './user.repository';
 import { passwordEncrypt } from 'src/utils/encrypt';
 import { UserSignUpResponseDto } from './dtos/signup/signup.response.dto';
 import { AuthService } from '../auth/auth.service';
+import { UserSignInRequestDto } from './dtos/signIn/signIn.request.dto';
+import { UserSignInResponseDto } from './dtos/signIn/signIn.response.dto';
 
 export interface UserService {
   signUp: (request: UserSignUpRequestDto) => Promise<UserSignUpResponseDto>;
+  signIn: (request: UserSignInRequestDto) => Promise<UserSignInResponseDto>;
+  getUserInfo: () => Promise<any>;
 }
 
 @Injectable()
@@ -35,4 +39,11 @@ export class UserServiceImpl implements UserService {
     const tokens = this.authService.jwtSignIn(user);
     return tokens;
   }
+
+  async signIn(request: UserSignInRequestDto): Promise<UserSignInResponseDto> {
+    console.log(request);
+    return { accessToken: 'a', refreshToken: 'a' };
+  }
+
+  async getUserInfo() {}
 }
