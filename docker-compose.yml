@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql
+    ports:
+      - '${DB_PORT}:3306'
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - ./data/mysql/:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
+
+  # shadow_mysql:
+  #   image: mysql:8.0
+  #   restart: always
+  #   container_name: shadow_mysql
+  #   ports:
+  #     - '${SHOADOWDB_PORT}:3307'
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: '${SHOADOWDB_PASSWORD}'
+  #     MYSQL_DATABASE: '${SHOADOWDB_DATABASE}'
+  #     MYSQL_USER: '${SHOADOWDB_USERNAME}'
+  #     MYSQL_PASSWORD: '${SHOADOWDB_PASSWORD}'
+  #   volumes:
+  #     - ./data/mysql/:/var/lib/mysql
+  #     - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   command: --init-file /docker-entrypoint-initdb.d/init.sql
